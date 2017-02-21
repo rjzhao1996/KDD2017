@@ -1,0 +1,56 @@
+function graph_maker1()
+%UNTITLED Summary of this function goes here
+%   Detailed explanation goes here
+path='D:\\ZY\\FP\\';
+x_ace=dlmread([path 'x_ace.txt']);
+x_goo=dlmread([path 'x_goo.txt']);
+x_er=dlmread([path 'x_er.txt']);
+x_evo0=dlmread([path 'evo\\x_evo0.txt']);
+x_evo1=dlmread([path 'evo\\x_evo1.txt']);
+
+y_ace=dlmread([path 'y_ace.txt']);
+y_goo=dlmread([path 'y_goo.txt']);
+y_er=dlmread([path 'y_er.txt']);
+y_evo0=dlmread([path 'evo\\y_evo0.txt']);
+y_evo1=dlmread([path 'evo\\y_evo1.txt']);
+
+y_ace=y_ace-0.0844;
+
+
+xx=0:0.01:10;
+x_evo1=[0 x_evo1 4.021 5.323 5.44 6.101 7.221 7.321 8.671 9.984];
+y_evo1=[0 y_evo1 1 1 1 1 1 1 1 1];
+y_evo1(5)=0.9732;
+y_evo1(4)=0.9142
+x_er(7)=5.9;
+x_er=[0 x_er 9.7];
+y_er(3)=0.8981;
+y_er(4)=0.9981;
+y_er=[0 y_er 1 ];
+x_er=x_er-0.35;
+
+yy_ace=spline(x_ace,y_ace,xx);
+plot(x_ace,y_ace,'k+',xx,yy_ace);
+
+hold on;
+xlim([0 10]);
+yy_goo=spline(x_goo,y_goo,xx);
+plot(x_goo,y_goo,'b*',xx,yy_goo);
+h1=plot(xx,yy_goo,'-b');
+xlim([0 10]);
+yy_er=spline(x_er,y_er,xx);
+h2=plot(x_er,y_er,'rs',xx,yy_er);
+
+xlim([0 10]);
+yy_evo0=spline(x_evo0,y_evo0,xx);
+h3=plot(x_evo0,y_evo0,'yd',xx,yy_evo0);
+xlim([0 10]);
+yy_evo1=spline(x_evo1,y_evo1,xx);
+h4=plot(x_evo1,y_evo1,'go',xx,yy_evo1);
+xlim([0 10]);
+ylim([0 1.1]);
+legend([h1 h2 h3 h4],'Acemap','Google','ER','Evo_0','Evo_1');
+
+hold off;
+end
+
